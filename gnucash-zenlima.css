@@ -1,0 +1,213 @@
+* {
+  margin:               0;
+  padding:              0;
+  font-size:            1em;
+  font-weight:          normal;
+  }
+
+body {
+  padding-left:         1em;
+  padding-right:        1em;
+  margin-top:           26em;
+
+  font-family:		'Nimbus Sans L','Gill Sans MT Pro Light', sans-serif;
+  font-size:            10pt;
+  }
+
+div[id="titelUndUntertitel"] {
+  position:             absolute;
+  top:                  1em;
+  right:                1em;
+  width:                16em;
+  }
+
+div[id="titelUndUntertitel"] > p >  span[class="titel"] > span {
+  font-size:            3.5em;
+  font-family:          'Gill Sans MT Pro Heavy' sans-serif;
+  }
+
+div[id="titelUndUntertitel"] > p >  span[class="untertitel"] > span {
+  font-size:            1.2em;
+  }
+
+div[id="register"] {
+  position:             absolute;
+  right:                1em;
+  top:                  8em;
+  width:                16em;
+  }
+
+div[id="register"] > dl > dt {
+  float:                left;
+  width:                7em;
+  }
+
+div[id="register"] > dl > dd[class="coyaddr"],
+div[id="register"] > dl > dd[class="coyurl"],
+div[id="register"] > dl > dd[class="coyaddr"],
+div[id="register"] > dl > dd[class="coycontact"],
+div[id="register"] > dl > dd[class="duedate"] {
+  padding-bottom:       0.5em;
+}
+
+div[id="register"] > dl > dt[class="coyemail"],
+div[id="register"] > dl > dd[class="coyemail"] {
+  padding-top:          0.5em;
+}
+
+
+div[id="register"] > dl > dd {
+  margin-left:          7em;
+  }
+
+div[id="register"] > dl > dt > span,
+div[id="register"] > dl > dd > span {
+  font-size:            0.8em;
+  }
+
+div[id="register"] > dl > dt[class="coyaddr"] {
+  display:              none;
+  }
+
+div[id="register"] > dl > dd[class="coyaddr"] {
+  margin-left:          0;
+  }
+
+div[id="backaddress"] {
+  position:             absolute;
+  top:                  14em;
+  left:                 1em;
+  width:                30em;
+  }
+
+div[id="backaddress"] > p {
+  font-size:            0.7em;
+}
+
+div[id="toaddress"] {
+  position:             absolute;
+  top:                  16em;
+  left:                 1em;
+  width:                30em;
+  }
+
+h1 {
+  text-align:           center;
+  }
+
+h1 > span {
+  font-weight:          bold;
+  font-size:            1.2em;
+  }
+
+div[id="inhalt"] {
+
+  padding-top:          3em;
+  padding-bottom:       6em;
+  }
+
+div[id="legalform"] {
+  width:                18em;
+  float:                left;
+  }
+
+div[id="coyid"] {
+  display:              inline-block;
+  }
+
+div[id="bankaccount"] {
+  width:                18em;
+  float:                right;
+  }
+
+div[id="legalform"] > dl > dt > span,
+div[id="coyid"] > dl > dt > span,
+div[id="bankaccount"] > p {
+  font-weight:           bold;
+  }
+
+div[id="legalform"] > dl > dt > span ,
+div[id="legalform"] > dl > dd > span ,
+div[id="coyid"] > dl > dt > span ,
+div[id="coyid"] > dl > dd > span ,
+div[id="bankaccount"] > p,
+div[id="bankaccount"] > dl > dt > span ,
+div[id="bankaccount"] > dl > dd > span {
+  font-size:            0.7em;
+  }
+
+div[id="bankaccount"] > dl > dt {
+  float:                left;
+  width:                6em;
+  }
+
+div[id="bankaccount"] > dl > dd {
+  margin-left:          6em;
+  }
+div[id="legalform"] > dl > dd {
+  padding-bottom:       0.25em;
+  }
+
+table {
+  margin-bottom:        2em;
+  font-size:            0.8em;
+  border:               0;
+  border-left-width:    0.1em;
+  border-left-style:    solid;
+  border-left-color:    #000000;
+  border-right-width:    0.1em;
+  border-right-style:    solid;
+  border-right-color:    #000000;
+  }
+
+table > thead > tr > th {
+  border-bottom-width:  0.1em;
+  border-bottom-style:  solid;
+  border-bottom-color:  #000000;
+  color:                #ffffff;
+  background-color:     #000000;
+  }
+
+table > thead > tr > th {
+  font-weight:          bold;
+  padding-left:         0.5em;
+  padding-right:        0.5em;
+  text-align:           center;
+  }
+
+table > tbody > tr > th[class~="subtotal"] {
+  padding-left:         0.5em;
+  }
+
+table > tbody > tr > td[class~="discountRate"],
+table > tbody > tr > td[class~="discountValue"],
+table > tbody > tr > td[class~="taxRate"],
+table > tbody > tr > td[class~="taxValue"] {
+  background-color:     #eeeeee;
+  }
+
+table > tbody > tr > th[class~="subtotal"],
+table > tbody > tr > td[class~="subtotal"],
+table > tbody > tr > td[class~="subtotal"] nobr {
+  border-top-width:     0.1em;
+  border-top-style:     solid;
+  border-top-color:     #000000;
+  font-weight:          bold;
+  }
+
+table > tbody > tr > td[class~="total"],
+table > tbody > tr > td[class~="total"] strong,
+table > tbody > tr > td[class~="total"] nobr {
+  font-weight:          bold;
+  }
+
+table > tbody > tr > td[class~="total"] {
+  color:                #ffffff;
+  background-color:     #000000;
+  }
+
+table > tbody > tr > td[class~="value"],
+table > tbody > tr > td[class~="value"] nobr {
+  padding-left:         0.5em;
+  padding-right:        0.5em;
+  }
