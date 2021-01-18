@@ -11,9 +11,8 @@ Der vorliegenende Report ist auf der Grundlage des Reports von Zelima, und chris
 
 - [german-taxinvoice.scm](german-taxinvoice.scm)
 - [german-taxinvoice.eguile.scm](german-taxinvoice.eguile.scm)
-- [german-taxinvoice.css](german-taxinvoice.css)
 
-herunter und speichern sie diese Dateien in das Verzeichnis in [GNC_DATA_HOME](https://wiki.gnucash.org/wiki/Configuration_Locations#GNC_DATA_HOME) ab. Die Dokumentation ist hierbei nicht ganz aktuell. Es sollten sich bereits ```.scm``` Dateien in diesem Verzeichnis befinden. Bei mir waren diese im Unterverzeichnis ```books``` enthalten. In diesem Verzeichnis sucht schließlich Gnucash eigens gestaltete Guile/Scheme Dateien.
+herunter und speichern sie diese Dateien in das Verzeichnis in [GNC_DATA_HOME](https://wiki.gnucash.org/wiki/Configuration_Locations#GNC_DATA_HOME) ab. In diesem Verzeichnis sucht schließlich Gnucash eigens gestaltete Guile/Scheme Dateien.
 
 2. Bearbeiten sie nun im Verzeichnis [GNC_CONFIG_HOME](https://wiki.gnucash.org/wiki/Configuration_Locations#GNC_CONFIG_HOME) die Datei ```config-user.scm``` oder falls sie nicht exisitiert, legen sie diese an und fügen sie den folgenden Inhalt dieser Datei hinzu:
 ```

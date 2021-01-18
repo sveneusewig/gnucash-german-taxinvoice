@@ -99,7 +99,6 @@
          ((equal? (xaccSplitGetParent (car splits)) txn) (lp (cdr splits)))
          (else (set! payments? #t))))
 ?>
-
 <!-- ====================================================================== -->
 <!-- The HTML for the invoice starts here -->
 <html>
@@ -110,26 +109,57 @@
 <link rel="stylesheet" href="<?scm:d (make-file-url opt-css-file) ?>" type="text/css">
 <!-- Note that the external stylesheet file is overridden by this following: -->
 <style type="text/css">
-  body {
-    <?scm:d opt-text-font ?>
+div.main {
+  margin: 2em;
+  position: relative;
+  min-height: 100%;
+}
+div.footer {
+  text-align: center;
+}
+thead
+{
+  display:table-header-group;
+}
+tbody
+{
+  display:table-row-group;
+}
+@page {
+  size: A4;
+  margin: 11mm 17mm 17mm 17mm;
+}
+@media print {
+  div.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
   }
-  table { /* table does not inherit font */
-    <?scm:d opt-text-font ?>
-    <?scm:d opt-css-border-collapse ?>
+  html, body {
+    width: 210mm;
+    height: 297mm;
   }
-  table[border="1"] th {
-    border-color:<?scm:d opt-css-border-color-th ?>;
-  }
-  table[border="1"] td {
-    border-color:<?scm:d opt-css-border-color-td ?>;
-  }
+}
+body {
+  <?scm:d opt-text-font ?>
+}
+table { /* table does not inherit font */
+  <?scm:d opt-text-font ?>
+  <?scm:d opt-css-border-collapse ?>
+}
+table[border="1"] th {
+  border-color:<?scm:d opt-css-border-color-th ?>;
+}
+table[border="1"] td {
+  border-color:<?scm:d opt-css-border-color-td ?>;
+}
 
-  h1.coyname {
-    <?scm:d opt-heading-font ?>
-  }
-  <?scm:d opt-extra-css ?>
+h1.coyname {
+  <?scm:d opt-heading-font ?>
+}
+<?scm:d opt-extra-css ?>
 </style>
-
 </head>
 <body>
 
@@ -149,7 +179,7 @@
   <?scm )) ?>
   <td align="left">
     <h1 class="coyname"><?scm:d (or coyname (G_ "Company Name")) ?></h1>
-    <span class="slogan"><span><?scm:d opt-company-slogan ?></span>
+    <span class="slogan"><?scm:d opt-company-slogan ?></span>
   </td>
   <td align="right"><table border="0">
       <?scm (if (and opt-row-contact coycontact) (begin ?>
