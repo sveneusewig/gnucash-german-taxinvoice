@@ -109,7 +109,6 @@
 (define optname-extra-css		(N_ "Embedded CSS"))
 (define optname-report-title		(N_ "Report title"))
 (define optname-template-file		(N_ "Template file"))
-(define optname-css-file	        (N_ "CSS stylesheet file"))
 (define optname-heading-font		(N_ "Heading font"))
 (define optname-text-font		(N_ "Text font"))
 (define optname-logofile	        (N_ "Logo filename"))
@@ -172,10 +171,7 @@
   ;; Display options
   (add-option (gnc:make-string-option displaypage optname-template-file "a" 
     (N_ "The file name of the eguile template part of this report. This file should either be in your .gnucash directory, or else in its proper place within the GnuCash installation directories.")
-    "taxinvoice.eguile.scm"))
-  (add-option (gnc:make-string-option displaypage optname-css-file "b" 
-    (N_ "The file name of the CSS stylesheet to use with this report. This file should either be in your .gnucash directory, or else in its proper place within the GnuCash installation directories.") 
-    "taxinvoice.css"))
+    "german-taxinvoice.eguile.scm"))
   (add-option (gnc:make-font-option 
                 displaypage optname-heading-font "c" 
                 (N_ "Font to use for the main heading.") "Sans Bold 18"))
@@ -294,8 +290,6 @@
          (opt-invoice               (opt-value gnc:pagename-general gnc:optname-invoice-number))
          (opt-template-file         (find-template
                                       (opt-value displaypage optname-template-file)))
-         (opt-css-file              (find-stylesheet
-                                      (opt-value displaypage optname-css-file)))
          (opt-heading-font          (font-name-to-style-info 
                                       (opt-value displaypage optname-heading-font)))
          (opt-text-font             (font-name-to-style-info

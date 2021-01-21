@@ -106,7 +106,6 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <title><?scm:d (G_ "Invoice") ?> <?scm:d invoiceid ?></title>
 
-<link rel="stylesheet" href="<?scm:d (make-file-url opt-css-file) ?>" type="text/css">
 <!-- Note that the external stylesheet file is overridden by this following: -->
 <style type="text/css">
 div.main {
