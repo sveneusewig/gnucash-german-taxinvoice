@@ -157,6 +157,10 @@ table[border="1"] td {
 h1.coyname {
   <?scm:d opt-heading-font ?>
 }
+div#returnaddress {
+  font-size: 70%;
+  text-decoration: underline;
+}
 <?scm:d opt-extra-css ?>
 </style>
 </head>
@@ -223,6 +227,11 @@ h1.coyname {
 <tr valign="top">
   <!-- customer info -->
   <td align="left">
+    <?scm (if (and opt-returnaddress coyaddr) (begin ?>
+      <div id="returnaddress">
+        <p><?scm:d coyname ?><?scm:d delimiter ?><?scm:d (nl->delimiter coyaddr) ?></p>
+      </div>
+    <?scm )) ?>
     <?scm (if (and opt-row-company-name (not (string=? ownername ""))) (begin ?>
         <?scm:d ownername ?><br>
     <?scm )) ?>
