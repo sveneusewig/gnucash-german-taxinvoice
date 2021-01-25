@@ -288,8 +288,9 @@ div#returnaddress {
 </table>
 
 <!-- invoice lines table -->
-<h1 class="invoice"><?scm:d opt-report-title ?>
-<?scm (if opt-invnum-next-to-title (begin ?> - <?scm:d (nbsp invoiceid) ?><?scm )) ?></h1>
+<h3 class="invoice top-margin"><?scm:d opt-report-title ?>
+<?scm (if opt-invnum-next-to-title (begin ?> - <?scm:d (nbsp invoiceid) ?><?scm )) ?></h3>
+<p><?scm:d (nl->br opt-extra-notes-before) ?></p>
 <p><?scm:d (nl->br notes) ?></p>
 <table border="1" width="100%" cellpadding="4" class="entries">
   <thead>

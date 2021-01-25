@@ -84,6 +84,7 @@
 (define headingpage  (N_ "Headings 1"))
 (define headingpage2 (N_ "Headings 2"))
 (define notespage    (N_ "Notes"))
+(define extracsspage    (N_ "Extra CSS"))
 (define displaypage  (N_ "Display"))
 (define elementspage			(N_ "Elements"))
 (define companyaddpage      (N_ "Company"))
@@ -129,6 +130,7 @@
 (define optname-amount-due     		(N_ "Amount Due"))
 (define optname-payment-recd   		(N_ "Payment received text"))
 (define optname-extra-notes    		(N_ "Extra notes"))
+(define optname-extra-notes-before (N_ "Extra notes before table"))
 
 ;; German additional Fields
 (define optname-company-slogan            (N_ "Company slogan"))
@@ -234,11 +236,15 @@
     "h" "" (G_ "Job name: ")))
 
   (add-option (gnc:make-text-option
-                notespage optname-extra-notes "a"
+                notespage optname-extra-notes-before "a"
+                (G_ "Notes added before invoice -- may contain HTML markup.")
+                ""))
+  (add-option (gnc:make-text-option
+                notespage optname-extra-notes "b"
                 (G_ "Notes added at end of invoice -- may contain HTML markup.") 
                 (G_ "Thank you for your patronage!")))
 
-  (add-option (gnc:make-text-option	notespage optname-extra-css "b"
+  (add-option (gnc:make-text-option	extracsspage optname-extra-css "a"
                 (N_ "Embedded CSS.")	"h1.coyname { text-align: left; }"))
   (gnc:options-set-default-section
     report-options gnc:pagename-general)
@@ -335,8 +341,9 @@
          (opt-ref-text              (opt-value headingpage2 optname-ref-text))
          (opt-jobnumber-text        (opt-value headingpage2 optname-jobnumber-text))
          (opt-jobname-text          (opt-value headingpage2 optname-jobname-text))
-         (opt-extra-css             (opt-value notespage    optname-extra-css)) 
+         (opt-extra-css             (opt-value extracsspage    optname-extra-css)) 
          (opt-extra-notes           (opt-value notespage    optname-extra-notes))
+         (opt-extra-notes-before    (opt-value notespage    optname-extra-notes-before))
          (opt-company-slogan            (opt-value companyaddpage optname-company-slogan))
          (optname-coyid-title           (opt-value companyaddpage optname-coyid-title))
          (opt-bank-connection-title     (opt-value bankconnectionpage optname-bank-connection-title))
@@ -385,5 +392,5 @@
        (set-opt options headingpage2 optname-invoice-number-text (G_ "Invoice #: "))
        (set-opt options headingpage2 optname-ref-text (G_ "Reference: "))
        (set-opt options headingpage2 optname-jobname-text (G_ "Engagement: "))
-       (set-opt options notespage optname-extra-css "h1.coyname { text-align: right; margin-bottom: 0px ; font-size: 200%; } h2.invoice { text-align: left; margin-bottom: 0px ; font-size: 500%; }")
+       (set-opt options extracsspage optname-extra-css "h1.coyname { text-align: right; margin-bottom: 0px ; font-size: 200%; } h2.invoice { text-align: left; margin-bottom: 0px ; font-size: 500%; }")
        options))
