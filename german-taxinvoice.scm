@@ -37,6 +37,8 @@
 
 (use-modules (srfi srfi-13)) ; for extra string functions
 
+(define delimiter " • ")
+
 (define-public (nl->delimiter str)
   ;; Replace newlines with -
   (string-substitute-alist str '((#\newline . ", "))))
@@ -82,6 +84,7 @@
 (define headingpage  (N_ "Headings 1"))
 (define headingpage2 (N_ "Headings 2"))
 (define notespage    (N_ "Notes"))
+(define extracsspage    (N_ "Extra CSS"))
 (define displaypage  (N_ "Display"))
 (define elementspage			(N_ "Elements"))
 (define companyaddpage      (N_ "Company"))
@@ -102,6 +105,7 @@
 (define optname-jobname-show		(N_ "Show Job name"))
 (define optname-jobnumber-show		(N_ "Show Job number"))
 (define optname-netprice		(N_ "Show net price"))
+(define optname-returnaddress    (N_ "Show return address"))
 (define optname-invnum-next-to-title	(N_ "Invoice number next to title"))
 (define optname-border-collapse		(N_ "table-border-collapse"))
 (define optname-border-color-th		(N_ "table-header-border-color"))
@@ -109,7 +113,6 @@
 (define optname-extra-css		(N_ "Embedded CSS"))
 (define optname-report-title		(N_ "Report title"))
 (define optname-template-file		(N_ "Template file"))
-(define optname-css-file	        (N_ "CSS stylesheet file"))
 (define optname-heading-font		(N_ "Heading font"))
 (define optname-text-font		(N_ "Text font"))
 (define optname-logofile	        (N_ "Logo filename"))
@@ -127,6 +130,7 @@
 (define optname-amount-due     		(N_ "Amount Due"))
 (define optname-payment-recd   		(N_ "Payment received text"))
 (define optname-extra-notes    		(N_ "Extra notes"))
+(define optname-extra-notes-before (N_ "Extra notes before table"))
 
 ;; German additional Fields
 (define optname-company-slogan            (N_ "Company slogan"))
@@ -142,6 +146,7 @@
 (define optname-bank-swiftcode            (N_ "Swift BIC"))
 (define optname-bank-ibancode             (N_ "IBAN"))
 (define optname-bank-accountnumber        (N_ "Account number"))
+(define optname-returnaddress             (N_ "Show return address"))
 ;; End German additional Fields
 
 
@@ -168,14 +173,12 @@
 (add-option (gnc:make-simple-boolean-option	elementspage	optname-jobname-show		"i" (N_ "Display Job name?") #t))
 (add-option (gnc:make-simple-boolean-option	elementspage	optname-jobnumber-show		"j" (N_ "Invoice Job number?") #f))
 (add-option (gnc:make-simple-boolean-option	elementspage	optname-netprice		"k" (N_ "Show net price?") #f))
+(add-option (gnc:make-simple-boolean-option elementspage  optname-returnaddress    "l" (N_ "Show return address?") #f))
 
   ;; Display options
   (add-option (gnc:make-string-option displaypage optname-template-file "a" 
     (N_ "The file name of the eguile template part of this report. This file should either be in your .gnucash directory, or else in its proper place within the GnuCash installation directories.")
-    "taxinvoice.eguile.scm"))
-  (add-option (gnc:make-string-option displaypage optname-css-file "b" 
-    (N_ "The file name of the CSS stylesheet to use with this report. This file should either be in your .gnucash directory, or else in its proper place within the GnuCash installation directories.") 
-    "taxinvoice.css"))
+    "german-taxinvoice.eguile.scm"))
   (add-option (gnc:make-font-option 
                 displaypage optname-heading-font "c" 
                 (N_ "Font to use for the main heading.") "Sans Bold 18"))
@@ -233,11 +236,15 @@
     "h" "" (G_ "Job name: ")))
 
   (add-option (gnc:make-text-option
-                notespage optname-extra-notes "a"
+                notespage optname-extra-notes-before "a"
+                (G_ "Notes added before invoice -- may contain HTML markup.")
+                ""))
+  (add-option (gnc:make-text-option
+                notespage optname-extra-notes "b"
                 (G_ "Notes added at end of invoice -- may contain HTML markup.") 
                 (G_ "Thank you for your patronage!")))
 
-  (add-option (gnc:make-text-option	notespage optname-extra-css "b"
+  (add-option (gnc:make-text-option	extracsspage optname-extra-css "a"
                 (N_ "Embedded CSS.")	"h1.coyname { text-align: left; }"))
   (gnc:options-set-default-section
     report-options gnc:pagename-general)
@@ -294,8 +301,6 @@
          (opt-invoice               (opt-value gnc:pagename-general gnc:optname-invoice-number))
          (opt-template-file         (find-template
                                       (opt-value displaypage optname-template-file)))
-         (opt-css-file              (find-stylesheet
-                                      (opt-value displaypage optname-css-file)))
          (opt-heading-font          (font-name-to-style-info 
                                       (opt-value displaypage optname-heading-font)))
          (opt-text-font             (font-name-to-style-info
@@ -313,6 +318,7 @@
          (opt-jobname-show          (opt-value elementspage  optname-jobname-show))
          (opt-jobnumber-show        (opt-value elementspage  optname-jobnumber-show))
          (opt-netprice              (opt-value elementspage  optname-netprice))
+         (opt-returnaddress         (opt-value elementspage  optname-returnaddress))
          (opt-invoice-currency      (gncInvoiceGetCurrency opt-invoice))
          (opt-css-border-collapse   (if (opt-value displaypage optname-border-collapse) "border-collapse:collapse;"))
          (opt-css-border-color-th   (opt-value displaypage optname-border-color-th))
@@ -335,8 +341,9 @@
          (opt-ref-text              (opt-value headingpage2 optname-ref-text))
          (opt-jobnumber-text        (opt-value headingpage2 optname-jobnumber-text))
          (opt-jobname-text          (opt-value headingpage2 optname-jobname-text))
-         (opt-extra-css             (opt-value notespage    optname-extra-css)) 
+         (opt-extra-css             (opt-value extracsspage    optname-extra-css)) 
          (opt-extra-notes           (opt-value notespage    optname-extra-notes))
+         (opt-extra-notes-before    (opt-value notespage    optname-extra-notes-before))
          (opt-company-slogan            (opt-value companyaddpage optname-company-slogan))
          (optname-coyid-title           (opt-value companyaddpage optname-coyid-title))
          (opt-bank-connection-title     (opt-value bankconnectionpage optname-bank-connection-title))
@@ -385,5 +392,5 @@
        (set-opt options headingpage2 optname-invoice-number-text (G_ "Invoice #: "))
        (set-opt options headingpage2 optname-ref-text (G_ "Reference: "))
        (set-opt options headingpage2 optname-jobname-text (G_ "Engagement: "))
-       (set-opt options notespage optname-extra-css "h1.coyname { text-align: right; margin-bottom: 0px ; font-size: 200%; } h2.invoice { text-align: left; margin-bottom: 0px ; font-size: 500%; }")
+       (set-opt options extracsspage optname-extra-css "h1.coyname { text-align: right; margin-bottom: 0px ; font-size: 200%; } h2.invoice { text-align: left; margin-bottom: 0px ; font-size: 500%; }")
        options))

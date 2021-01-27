@@ -106,7 +106,6 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <title><?scm:d (G_ "Invoice") ?> <?scm:d invoiceid ?></title>
 
-<link rel="stylesheet" href="<?scm:d (make-file-url opt-css-file) ?>" type="text/css">
 <!-- Note that the external stylesheet file is overridden by this following: -->
 <style type="text/css">
 div.main {
@@ -157,6 +156,10 @@ table[border="1"] td {
 
 h1.coyname {
   <?scm:d opt-heading-font ?>
+}
+div#returnaddress {
+  font-size: 70%;
+  text-decoration: underline;
 }
 <?scm:d opt-extra-css ?>
 </style>
@@ -224,6 +227,11 @@ h1.coyname {
 <tr valign="top">
   <!-- customer info -->
   <td align="left">
+    <?scm (if (and opt-returnaddress coyaddr) (begin ?>
+      <div id="returnaddress">
+        <p><?scm:d coyname ?><?scm:d delimiter ?><?scm:d (nl->delimiter coyaddr) ?></p>
+      </div>
+    <?scm )) ?>
     <?scm (if (and opt-row-company-name (not (string=? ownername ""))) (begin ?>
         <?scm:d ownername ?><br>
     <?scm )) ?>
@@ -280,8 +288,9 @@ h1.coyname {
 </table>
 
 <!-- invoice lines table -->
-<h1 class="invoice"><?scm:d opt-report-title ?>
-<?scm (if opt-invnum-next-to-title (begin ?> - <?scm:d (nbsp invoiceid) ?><?scm )) ?></h1>
+<h3 class="invoice top-margin"><?scm:d opt-report-title ?>
+<?scm (if opt-invnum-next-to-title (begin ?> - <?scm:d (nbsp invoiceid) ?><?scm )) ?></h3>
+<p><?scm:d (nl->br opt-extra-notes-before) ?></p>
 <p><?scm:d (nl->br notes) ?></p>
 <table border="1" width="100%" cellpadding="4" class="entries">
   <thead>
